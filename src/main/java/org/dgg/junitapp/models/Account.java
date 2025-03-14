@@ -26,4 +26,15 @@ public class Account {
     public void setPerson(String person) {
         this.person = person;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Account account)) {
+            return false;
+        }
+        if (this.person == null || this.balance == null) {
+            return false;
+        }
+        return (account.getPerson().equals(this.person) && account.getBalance().equals(this.balance));
+    }
 }
