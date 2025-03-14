@@ -19,5 +19,7 @@ public class Bank {
     }
 
     public void transfer(Account from, Account to, BigDecimal amount) {
+        from.debit(amount);
+        to.credit(amount);
     }
 }
