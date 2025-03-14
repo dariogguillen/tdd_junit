@@ -56,4 +56,14 @@ class AccountTest {
         Exception e = assertThrows(NotEnoughMoneyException.class, () -> account.debit(new BigDecimal("1000.12346")));
         assertEquals("Not enough money", e.getMessage());
     }
+
+    @Test
+    void testTransfer() {
+        Account from = new Account("John Doe", new BigDecimal("1000.12345"));
+        Account to = new Account("Jane Doe", new BigDecimal("1000.12345"));
+        Bank bank = new Bank("Bank of America");
+        bank.transfer(from, to, new BigDecimal("100"));
+        assertEquals(new BigDecimal("900.12345"), from.getBalance());
+        assertEquals(new BigDecimal("1100.12345"), to.getBalance());
+    }
 }
