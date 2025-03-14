@@ -1,5 +1,6 @@
 package org.dgg.junitapp.models;
 
+import org.dgg.junitapp.exceptions.NotEnoughMoneyException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -47,5 +48,12 @@ class AccountTest {
         assertNotNull(account.getBalance());
         assertEquals(new BigDecimal("1100.12345"), account.getBalance());
         assertEquals("1100.12345", account.getBalance().toPlainString());
+    }
+
+    @Test
+    void testDebitNotEnoughMoney() {
+        Account account = new Account("John Doe", new BigDecimal("1000.12345"));
+        Exception e = assertThrows(NotEnoughMoneyException.class, () -> account.debit(new BigDecimal("1000.12346")));
+        assertEquals("Not enough money", e.getMessage());
     }
 }
