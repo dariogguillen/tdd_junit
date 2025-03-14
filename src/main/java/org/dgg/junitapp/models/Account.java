@@ -27,6 +27,12 @@ public class Account {
         this.person = person;
     }
 
+    public void debit(BigDecimal amount) {
+    }
+
+    public void credit(BigDecimal amount) {
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Account account)) {
