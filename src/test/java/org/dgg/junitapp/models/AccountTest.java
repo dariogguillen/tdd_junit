@@ -80,7 +80,15 @@ class AccountTest {
         assertEquals(bank, from.getBank());
         assertEquals(bank, to.getBank());
         assertEquals("Bank of America", from.getBank().getName());
-        assertEquals("John Doe", bank.getAccounts().stream().filter(c -> c.getPerson().equals("John Doe")).findFirst().get().getPerson());
+        assertEquals(
+                "John Doe", bank
+                .getAccounts()
+                .stream()
+                .filter(c -> c.getPerson().equals("John Doe"))
+                .findFirst()
+                .get()
+                .getPerson()
+        );
     }
 
 }

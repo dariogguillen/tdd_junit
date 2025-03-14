@@ -10,6 +10,7 @@ public class Bank {
 
     public Bank(String name) {
         this.name = name;
+        this.accounts = new ArrayList<>();
     }
 
     public String getName() {
@@ -30,6 +31,7 @@ public class Bank {
 
     public void addAccount(Account account) {
         this.accounts.add(account);
+        account.setBank(this);
     }
 
     public void transfer(Account from, Account to, BigDecimal amount) {
