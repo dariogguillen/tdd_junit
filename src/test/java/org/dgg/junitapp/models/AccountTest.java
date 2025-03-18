@@ -1,6 +1,8 @@
 package org.dgg.junitapp.models;
 
 import org.dgg.junitapp.exceptions.NotEnoughMoneyException;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,12 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccountTest {
 
     @Test
+    @DisplayName("Test account name")
+    @Disabled
     void testAccountName() {
+        fail();
         Account account = new Account("John Doe", new BigDecimal("1000.12345"));
         assertEquals("John Doe", account.getPerson());
     }
 
     @Test
+    @DisplayName("Test account balance")
+    @Deprecated
     void testAccountBalance() {
         Account account = new Account("John Doe", new BigDecimal("1000.12345"));
         assertEquals(new BigDecimal("1000.12345"), account.getBalance());
@@ -25,6 +32,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Test account reference")
     void accountReference() {
         Account account = new Account("John Doe", new BigDecimal("1000.12345"));
         Account account2 = new Account("John Doe", new BigDecimal("1000.12345"));
