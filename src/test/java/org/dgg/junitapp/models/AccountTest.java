@@ -45,8 +45,8 @@ class AccountTest {
     void testCredit() {
         Account account = new Account("John Doe", new BigDecimal("1000.12345"));
         account.credit(new BigDecimal("100"));
-        assertNotNull(account.getBalance());
-        assertEquals(new BigDecimal("1100.12345"), account.getBalance());
+        assertNotNull(account.getBalance(), "Account can't be null");
+        assertEquals(new BigDecimal("1100.12345"), account.getBalance(), "Account balance should be 1100.12345");
         assertEquals("1100.12345", account.getBalance().toPlainString());
     }
 
@@ -75,19 +75,21 @@ class AccountTest {
         bank.addAccount(from);
         bank.addAccount(to);
         bank.transfer(from, to, new BigDecimal("100"));
-        assertEquals(new BigDecimal("900.12345"), from.getBalance());
-        assertEquals(new BigDecimal("1100.12345"), to.getBalance());
-        assertEquals(bank, from.getBank());
-        assertEquals(bank, to.getBank());
-        assertEquals("Bank of America", from.getBank().getName());
-        assertEquals(
-                "John Doe", bank
-                .getAccounts()
-                .stream()
-                .filter(c -> c.getPerson().equals("John Doe"))
-                .findFirst()
-                .get()
-                .getPerson()
+        assertAll(
+                () -> assertEquals(new BigDecimal("900.12345"), from.getBalance()),
+                () -> assertEquals(new BigDecimal("1100.12345"), to.getBalance()),
+                () -> assertEquals(bank, from.getBank()),
+                () -> assertEquals(bank, to.getBank()),
+                () -> assertEquals("Bank of America", from.getBank().getName()),
+                () -> assertEquals(
+                        "John Doe",
+                        bank
+                            .getAccounts()
+                            .stream()
+                            .filter(c -> c.getPerson().equals("John Doe"))
+                            .findFirst()
+                            .get()
+                            .getPerson())
         );
     }
 
